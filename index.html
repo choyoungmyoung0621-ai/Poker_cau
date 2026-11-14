@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#071713" />
+  <meta name="description" content="친구들과 링크 하나로 즐기는 실시간 텍사스 홀덤" />
+  <title>FELT — 친구들과 포커 한 판</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="홈으로"><span class="logo">♠</span><span>FELT<span class="brand-dot">.</span></span></a>
+    <div class="top-right"><a href="/blackjack.html" style="padding:10px 13px;border:1px solid #a99c6680;border-radius:22px;color:#e8ce93;font-weight:800;letter-spacing:.04em">♥ BLACKJACK 해보기</a><span class="top-label">PRIVATE TABLE · TEXAS HOLD'EM</span><span class="live-pulse"></span><span class="small-label">LIVE</span></div>
+  </header>
+
+  <main>
+    <section id="landing" class="landing">
+      <div class="intro">
+        <div class="eyebrow"><span class="gold-line"></span> THE TABLE IS YOURS</div>
+        <h1>친구들이 모이면,<br><em>게임이 시작된다.</em></h1>
+        <p>가입 없이 닉네임만. 텍사스 홀덤을 즐기거나 <a href="/blackjack.html" style="color:#f1d49e;text-decoration:underline">블랙잭으로 이동</a>할 수도 있어요.</p>
+        <div class="intro-tags"><span>♠ 2–8 PLAYERS</span><span>⚡ REALTIME</span><span>◈ PRIVATE ROOMS</span></div>
+        <div class="hero-art" aria-hidden="true"><div class="art-card art-card-1"><b>A</b><span>♠</span></div><div class="art-card art-card-2"><b>K</b><span>♥</span></div><div class="art-chip">100</div></div>
+      </div>
+      <div class="entry-card">
+        <div class="entry-heading"><span class="section-num">01 / ENTER THE TABLE</span><h2>플레이 준비</h2><p>게임 내 가상 칩만 사용해요.</p></div>
+        <form id="create-form" class="entry-form">
+          <label for="create-name">닉네임</label><input id="create-name" autocomplete="nickname" maxlength="16" minlength="2" placeholder="친구들이 알아볼 이름" required />
+          <button id="create-button" class="btn btn-primary" type="submit">새로운 방 만들기 <span>↗</span></button>
+        </form>
+        <div class="or-line"><span>또는 기존 방 참여하기</span></div>
+        <form id="join-form" class="entry-form">
+          <label for="join-code">초대 코드</label><input id="join-code" maxlength="6" placeholder="6자리 방 코드" autocapitalize="characters" required />
+          <label for="join-name">닉네임</label><input id="join-name" autocomplete="nickname" maxlength="16" minlength="2" placeholder="친구들이 알아볼 이름" required />
+          <button id="join-button" class="btn btn-secondary" type="submit">친구 방 참여하기 <span>→</span></button>
+        </form>
+        <div class="entry-footer">🔒 공정한 셔플 · 서버 베팅 검증 · 비공개 카드</div>
+      </div>
+    </section>
+
+    <section id="game" class="game hidden">
+      <div class="game-heading">
+        <div><div class="section-num">LIVE GAME SESSION</div><h1>THE TABLE <span class="gold-color">♠</span></h1></div>
+        <div class="game-controls"><div class="room-code"><div>ROOM CODE</div><strong id="room-code">------</strong></div><button id="invite-btn" class="btn btn-small" type="button">초대 링크 복사 <span>↗</span></button><button id="exit-btn" class="icon-btn" type="button" title="로비로 이동">⎋</button></div>
+      </div>
+      <div class="status-strip"><div><span id="online-dot" class="green-dot"></span> <span id="connection-status">연결 중…</span></div><div class="status-meta"><span id="stage-name">대기실</span><span class="sep">•</span><span id="hand-number">HAND #0</span><span class="sep">•</span><span id="latency">PING —</span></div></div>
+      <div class="game-grid">
+        <div class="table-column">
+          <div id="table-area" class="table-area">
+            <div class="felt-shadow"></div><div class="felt"><div class="felt-pattern"></div><div class="felt-watermark">FELT<span>.</span><small>PRIVATE POKER CLUB</small></div></div>
+            <div id="table-center" class="table-center"><div id="pot-label" class="pot-label">TOTAL POT</div><div id="pot-value" class="pot-value">0 <span>CHIPS</span></div><div id="community" class="community"></div><div id="table-hint" class="table-hint">친구들을 초대해 주세요</div></div>
+            <div id="seats" class="seats" aria-label="플레이어 좌석"></div>
+          </div>
+          <div id="action-panel" class="action-panel"><p>게임을 준비하는 중이에요.</p></div>
+          <div id="results" class="results hidden" aria-live="polite"></div>
+        </div>
+        <aside class="sidebar">
+          <div class="side-card"><div class="side-head"><span>PLAYERS</span><strong id="player-count">0/8</strong></div><div id="roster" class="roster"></div></div>
+          <div class="side-card chat-card"><div class="side-head"><span>TABLE CHAT</span><small>친구끼리 대화</small></div><div id="chat-messages" class="chat-messages"><div class="chat-empty">아직 메시지가 없어요.</div></div><form id="chat-form" class="chat-form"><input id="chat-input" maxlength="180" placeholder="메시지 입력..." aria-label="채팅 입력"/><button type="submit" aria-label="보내기">↗</button></form></div>
+          <div class="side-card rules"><div class="side-head"><span>TABLE RULES</span><span>NO LIMIT</span></div><div class="rule-line"><span>시작 칩</span><strong>1,000</strong></div><div class="rule-line"><span>블라인드</span><strong>10 / 20</strong></div><div class="rule-line"><span>턴 제한</span><strong>25초</strong></div><div class="rule-line"><span>게임머니</span><strong>가상 칩</strong></div></div>
+        </aside>
+      </div>
+      <footer class="game-footer"><span>서버 검증 · 암호학적 셔플 · 별도 프로그램 설치 없음</span><span>PLAY FAIR. PLAY TOGETHER.</span></footer>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>

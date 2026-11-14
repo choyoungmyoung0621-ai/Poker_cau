@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#071510"/>
+  <meta name="description" content="친구들과 함께 하는 실시간 온라인 블랙잭, 가상 칩 전용"/>
+  <title>FELT 21 — 친구들과 블랙잭</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/blackjack.css"/>
+  <script type="module" src="/blackjack.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="홀덤 메인 화면"><span class="logo">♣</span><span>FELT<span class="brand-dot">21</span></span></a>
+    <div class="bj-navigation"><a href="/">♠ TEXAS HOLD'EM</a><a href="/blackjack.html" class="active">♥ BLACKJACK</a></div>
+  </header>
+  <main>
+    <section id="landing" class="landing bj-landing">
+      <div class="intro bj-intro">
+        <div class="eyebrow"><span class="gold-line"></span> BEAT THE DEALER</div>
+        <h1>21을 향한<br/><em>한 장의 승부.</em></h1>
+        <p>딜러를 상대로 친구들과 함께하는 실시간 블랙잭. 가입 없이 닉네임과 초대 코드만 있으면 돼요.</p>
+        <div class="intro-tags"><span>♣ 1–8 PLAYERS</span><span>⚡ REALTIME</span><span>◈ 가상 칩 ONLY</span></div>
+        <div class="bj-landing-cards" aria-hidden="true"><div class="bj-visual-card">A<span>♠</span></div><div class="bj-visual-card">K<span>♥</span></div><div class="bj-visual-sum">21</div></div>
+      </div>
+      <div class="entry-card">
+        <div class="entry-heading"><span class="section-num">01 / BLACKJACK TABLE</span><h2>게임 입장</h2><p>실제 돈이나 현금 교환 없이 가상 칩으로만 즐겨요.</p></div>
+        <form id="create-form" class="entry-form">
+          <label for="create-name">닉네임</label><input id="create-name" maxlength="16" minlength="2" autocomplete="nickname" placeholder="친구들이 알아볼 이름" required/>
+          <button id="create-button" class="btn btn-primary" type="submit">블랙잭 방 만들기 <span>↗</span></button>
+        </form>
+        <div class="or-line"><span>또는 친구의 방 참여하기</span></div>
+        <form id="join-form" class="entry-form">
+          <label for="join-code">6자리 방 코드</label><input id="join-code" maxlength="6" placeholder="ABC123" autocapitalize="characters" required/>
+          <label for="join-name">닉네임</label><input id="join-name" maxlength="16" minlength="2" autocomplete="nickname" placeholder="친구들이 알아볼 이름" required/>
+          <button id="join-button" class="btn btn-secondary" type="submit">블랙잭 방 참여하기 <span>→</span></button>
+        </form>
+        <div class="entry-footer">♣ 공정한 서버 셔플 · 딜러 규칙 자동 처리 · 매 라운드 검증</div>
+      </div>
+    </section>
+
+    <section id="game" class="game hidden">
+      <div class="game-heading">
+        <div><div class="section-num">BLACKJACK · LIVE ROOM</div><h1>THE TABLE <span class="gold-color">21</span></h1></div>
+        <div class="game-controls"><div class="room-code"><div>ROOM CODE</div><strong id="room-code">------</strong></div><button id="invite-btn" class="btn btn-small" type="button">초대 링크 복사 ↗</button><button id="exit-btn" class="icon-btn" type="button" title="방 나가기">⎋</button></div>
+      </div>
+      <div class="status-strip"><div><span id="online-dot" class="green-dot"></span><span id="connection-status">연결 중…</span></div><div class="status-meta"><span id="stage-name">대기실</span><span class="sep">•</span><span id="hand-number">ROUND #0</span><span class="sep">•</span><span id="latency">PING —</span></div></div>
+      <div class="bj-grid">
+        <div class="bj-primary">
+          <div class="bj-table">
+            <div class="bj-inner-ring"></div>
+            <div class="bj-table-mark" aria-hidden="true">FELT · 21</div>
+            <div class="bj-dealer"><div class="bj-label">DEALER <span id="dealer-score"></span></div><div id="dealer-cards" class="bj-hand-cards" aria-label="딜러 카드"></div></div>
+            <div class="bj-table-message" id="table-message">친구를 초대하고 블랙잭을 시작해요</div>
+            <div class="bj-my-hands" id="my-hands"></div>
+          </div>
+          <div id="action-panel" class="bj-actions" aria-live="polite"></div>
+          <div id="results" class="bj-results hidden"></div>
+          <div class="bj-rule-note">6덱 · 딜러 소프트 17 스탠드 · 블랙잭 3:2 · 더블다운 및 스플릿(최대 4핸드) · 보험/서렌더 없음</div>
+        </div>
+        <aside class="sidebar">
+          <div class="side-card"><div class="side-head"><span>PLAYER TABLE</span><strong id="player-count">0/8</strong></div><div id="roster" class="bj-roster"></div></div>
+          <div class="side-card chat-card"><div class="side-head"><span>TABLE CHAT</span><small>친구들과 대화</small></div><div id="chat-messages" class="chat-messages"></div><form id="chat-form" class="chat-form"><input id="chat-input" maxlength="180" aria-label="채팅 입력" placeholder="메시지 입력..."/><button type="submit" aria-label="채팅 보내기">↗</button></form></div>
+          <div class="side-card rules"><div class="side-head"><span>BLACKJACK RULES</span><span>FAIR PLAY</span></div><div class="rule-line"><span>시작 칩</span><strong>1,000</strong></div><div class="rule-line"><span>베팅</span><strong>10–200칩</strong></div><div class="rule-line"><span>행동 시간</span><strong>25초</strong></div><div class="rule-line"><span>딜러</span><strong>소프트 17 스탠드</strong></div></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>
